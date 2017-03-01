@@ -84,12 +84,12 @@
     在渲染之前，所有的值都会被转换成字符串，这帮助解决了跨站点攻击。
     
  ## 7. JSX 是对象
-     Babel 变异 JSX down to React.createElement() calls.
-     以下的两个实例是等效的：
-     const element = (
-         <h1 className="greeting">
-            Hello, world!
-         </h1>
+    Babel 变异 JSX down to React.createElement() calls.
+    以下的两个实例是等效的：
+    const element = (
+        <h1 className="greeting">
+           Hello, world!
+        </h1>
      );
      const element = React.createElement(
         'h1',
