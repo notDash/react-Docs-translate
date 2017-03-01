@@ -74,7 +74,7 @@
       警告：比起HTML，JSX更接近于JavaScript，所以JSX采用驼峰式的属性命名约定来代替HTML中的属性名。
       例如在JSX中，class变为className, tabindx变为tabIndex。
       
-## 6. JSX组织了注入攻击
+## 6. JSX阻止了注入攻击
     在JSX中嵌入用户的输入是安全的：
       const title = response.potentiallyMaliciousInput;
       // This is safe:
@@ -83,5 +83,17 @@
     默认情况下， 在渲染之前，React Dom会把嵌套在JSX里的任何值进行转义，也就是意味着，你无法注入任何非明确在应用中指定的东西。
     在渲染之前，所有的值都会被转换成字符串，这帮助解决了跨站点攻击。
     
-  
-    
+ ## 7. JSX 是对象
+     Babel 变异 JSX down to React.createElement() calls.
+     以下的两个实例是等效的：
+     const element = (
+         <h1 className="greeting">
+            Hello, world!
+         </h1>
+     );
+     const element = React.createElement(
+        'h1',
+        {className: 'greeting'},
+        'Hello, world!'
+     );
+ 
