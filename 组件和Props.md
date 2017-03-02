@@ -53,7 +53,7 @@
     组件可以被另外一个组件所引用。这使得我们可以在不同层级的详细信息中使用同一个组件。一个button，form，
     dialog，screen：在React中，这些通常都表现为一个组件。
     
-    例如，我们可以创建一个多次渲染 Welcome 的组件App:
+    例如，我们可以创建一个多次渲染 Welcome 的组件App:
       function Welcome(props) {
         return <h1>Hello, {props.name}</h1>;
       }
