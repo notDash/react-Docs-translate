@@ -19,10 +19,8 @@
 ### 1. 在JSX中嵌入表达式
     在JSX中可以嵌入任何JavaScript 表达式，通过使用一对花括号“{}”进行包裹。
     例如2 + 2, user.firstName, 和 formatName(user)都是有效的表达式：
-
-      ```javascript
+```javascript
       import React from 'react';
-      ```
       import ReactDom from 'react-dom';
       function formatName(user) {
           return user.firstName + ' ' + user.lastName;
@@ -43,7 +41,8 @@
           element,
           document.getElementById('root')
       );
-  
+```
+
     输出结果为：  Hello, Harper Perez!
     为了方便阅读，我们把JSX分割成多行来书写，当然并不是必须的，但是如果要这么做的话，我们还是建议用圆括号括起来，从而避免分号自动
     插入的陷阱。
@@ -51,49 +50,67 @@
 ### 2. JSX也是一种表达式
     编译之后，JSX表达式就会变成普通的JavaScript对象。
     这意味着你可以在if以及for语句块里使用JSX，赋值给一个变量，当做参数传递以及作为函数的返回值：
+```javascript
       function getGreeting(user) {
         if (user) {
           return <h1>Hello, {formatName(user)}!</h1>;
         }
         return <h1>Hello, Stranger.</h1>;
       }
-  
+```
+
 ### 3. 使用JSX来指定属性值
     你可以使用引号来为属性指定字符串常量值：
+```javascript
       const element = <div tabIndex="0"></div>;
+```
+
     你也可以在属性值中使用花括号来嵌套JavaScript表达式：
-      const element = <img src={user.avatarUrl}></img>;
-      
+
+```javascript
+    const element = <img src={user.avatarUrl}></img>;
+```
+
     当使用花括号来嵌套JavaScript表达式的时候，不要在花括号外面使用引号来嵌套。否则JSX将会把该值当做一个字符串字面量来处理，而不是
     表达式。在同一个属性值当中，你可以使用花括号和引号中的任意一个，但是不能两个都同时使用。
     
 ### 4. 使用JSX来指定子元素
     如果一个标签是空的，你可以使用‘/>’进行标签的闭合。看如下的XML:
-      const element = <img src={user.avatarUrl} />;
-    
+
+```javascript
+    const element = <img src={user.avatarUrl} />;
+```
+
     JSX标签可能会包含子元素：
-      const element = (
+
+```javascript
+    const element = (
         <div>
           <h1>Hello!</h1>
           <h2>Good to see you here.</h2>
         </div>
       );
-    
+```
+
       警告：比起HTML，JSX更接近于JavaScript，所以JSX采用驼峰式的属性命名约定来代替HTML中的属性名。
       例如在JSX中，class变为className, tabindx变为tabIndex。
       
 ### 5. JSX阻止了注入攻击
     在JSX中嵌入用户的输入是安全的：
+
+```javascript
       const title = response.potentiallyMaliciousInput;
       // This is safe:
       const element = <h1>{title}</h1>;
-      
+```
+
     默认情况下， 在渲染之前，React Dom会把嵌套在JSX里的任何值进行转义，也就是意味着，你无法注入任何非明确在应用中指定的东西。
     在渲染之前，所有的值都会被转换成字符串，这帮助解决了跨站点攻击。
     
 ### 6. JSX 是对象
      Babel 把 JSX 语法编译之后，其实就是调用了 React.createElement().
      以下的两个实例是等效的：
+```javascript     
      const element = (
        <h1 className="greeting">
           Hello, world!
@@ -114,6 +131,8 @@
             children: 'Hello, world'
           }
         };
+```
+
     这样的对象我们称之为React元素。你可以把它想象为我们在屏幕上所看到元素的一个描述。React读取这些对象，使用它们
     来构造DOM，并且保持实时更新。
     
@@ -124,8 +143,10 @@
 ## 渲染元素
     元素是React应用中最小的构建模块。
     一个元素描述了你想要在屏幕上看到的东西：
+```javascript    
       const element = <h1>Hello, world<h1/>;
-     
+```
+
     不像浏览器DOM元素那样，React元素是简单的对象，并且易于创建。（浏览器的元素创建代价比较昂贵）React DOM
     兼顾更新DOM去匹配React元素。
     
@@ -140,11 +161,14 @@
     孤立的根节点。
     
     渲染React元素到根DOM节点上，把二者都传递给ReactDom.render():
+```javascript    
         const element = <h1>Hello, world</h1>;
         ReactDOM.render(
             element,
             document.getElementById('root')
         );
+```
+
     在页面中将会显示： Hello, world
     
 ### 2. 更新已经渲染的元素
@@ -154,6 +178,7 @@
     根据我们目前的知识，更新UI的唯一途径是创建一个新的元素，传递给ReactDOM.render()进行渲染。
     
     思考以下时钟的示例：
+```javascript    
         function tick() {
             var element = (
                 <div>
@@ -168,6 +193,8 @@
         }
         
         setInterval(tick, 1000);
+```
+
     每隔一秒钟setInteval的回调就会去调用一次ReactDom.render（）。
         
     注意： 在实践中，大多数的React应用只调用一次ReactDom.render（）。下一个章节中，我们将会学习如何在
@@ -190,30 +217,46 @@
     
 ### 1. 函数（functional）和类（class）申明的组件
     定义组件的最简单的方式是写一个JavaScript函数：
+```javascript    
       function Welcome(props) {
         return <h1>Hello, {props.name}</h1>;
       }
+```
+
     这个函数是一个有效的React组件，因为它接收一个单一的props对象作为参数，并且返回了一个React元素。我们称之为
     函数化的组件，因为从字面上来看它就是一个JavaScript函数。
     
     你同样可以使用es6的class来定义一个组件：
-      class Welcome extends React.Component {
+
+```javascript
+    class Welcome extends React.Component {
           render() {
             return <h1>Hello, {this.props.name}</h1>;
           }
       }
+```
+
      从React的角度来看，以上两个组件是等价的。
      
      Classes 有一些其他的特性，我们将在下一章节探讨。鉴于函数化的组件简洁，我们将使用它来进行组件的定义。
      
 ### 2. 渲染组件
     在上面的示例中，我们仅仅使用到了表示DOM标签的React元素：
+
+```javascript    
       const element = <div />;
+```
+
     另外，元素也可以是用户自定义的组件：
-      const element = <Welcome name="Sara" />;
-    
+
+```javascript
+    const element = <Welcome name="Sara" />;
+```
+
     当React遇到用户自定义的组件的时候，它把JSX属性当做一个对象传递给组件，我们把改对象称之为“props”。
     例如，下面的代码将会把“Hello, Sara”渲染到上：
+
+```javascript    
       function Welcome(props) {
           return <h1>Hello, {props.name}</h1>;
       }
@@ -222,7 +265,8 @@
         element,
         document.getElementById('root')
       );
-    
+```
+
     让我们回顾下这个示例都发生了什么：
       1. 我们调用ReactDom.render()来渲染<Welcome name="Sara" />
       2. React调用Welcome组件，把{name: 'Sara'}作为props
@@ -238,6 +282,8 @@
     dialog，screen：在React中，这些通常都表现为一个组件。
     
     例如，我们可以创建一个多次渲染 Welcome 的组件App:
+    
+```javascript
       function Welcome(props) {
         return <h1>Hello, {props.name}</h1>;
       }
@@ -254,7 +300,8 @@
           <App />,
           document.getElementById('root')
       );
-       
+```
+
     典型的，新的React应用会在顶部有一个单一的App组件。然而，如果是在已有的项目中集成React，你可以通过自下而上的方式，从一个小的组件例如Botton开始，按照你自己的方式逐渐的由下而上
     到达视图的顶部。
 
@@ -265,6 +312,8 @@
 ### 4. 组件的提取
     不要担心把组件切分为更小的组件。
     例如，思考如下的 Comment 组件：
+
+```javascript    
       function Comment(props) {
           return (
             <div className="Comment">
@@ -286,6 +335,7 @@
             </div>
           );
       }
+```
 
     它接收author(一个对象)，text(字符串)，以及date(日期)作为props，描述了一个社交媒体
     网站上的评论。
@@ -293,6 +343,8 @@
     因为嵌套的关系，这个评论组件不好去做改动，也难于重用其中的个人信息部分。让我们从中提取
     一些组件。
     首先，我们将提取Avatar：
+
+```javascript    
       function Avatar(props) {
           return (
               <img className="Avatar"
@@ -301,12 +353,15 @@
              />
           );
       }
+```
+
     Avatar组件并不需要知道在Comment组件当中被渲染了。这也是为什么我们把prop的name定义为
     更加通用的user，而不是author。
 
     我们更加推荐从组件自身的视图角度来命名props，而不是通过他被使用的场景来定义。
 
     现在我们可以稍微的简化下Comment:
+```javascript    
         function Comment(props) {
           return (
             <div className="Comment">
@@ -325,7 +380,10 @@
             </div>
           );
         }
+```
+
     下一步我们将要提取UserInfo组件，该组件紧挨着用户的姓名，渲染一个Avatar组件：
+```javascript    
         function UserInfo(props) {
           return (
             <div className="UserInfo">
@@ -336,7 +394,10 @@
             </div>
           );
         }
+```
+
     这让我们进一步的简化Comment组件：
+```javascript    
         function Comment(props) {
           return (
             <div className="Comment">
@@ -350,6 +411,7 @@
             </div>
           );
         }
+```
 
     提取组件似乎是一件枯燥乏味的工作，但是在大型的应用中提供了可重用组件的模板。首要的一个原则
     就是如果UI中的一部分被使用了多次(Button, Panel, Avatar)，或者足够的复杂（pp, 
@@ -358,17 +420,22 @@
 ### 5. Props是只读的
     不管你是通过function或者是class的方式申明的组件，它从不会修改它自身的props。思考如下的
     Sum函数：
+```javascript    
         function sum(a,b) {
             renturn a + b;
         }  
+```
+
     类似这样的函数我们称之为纯粹(pure)的函数，因为这样的函数不会试图去改变他们的输入参数，
     并且相同的输入总是返回相同的结果。
 
     相反，如下的函数并不是纯粹的，因为它改变了它的入参。
+```javascript    
         function withdraw(account, amount) {
           account.total -= amount;
         }
-    
+```
+
     React非常的灵活，但是它有一条非常严格的规则：
         所有的React组件必须像纯粹的函数一样，不去影响到他们的props。
     当然，应用程序的UI是随时在变化的。在下一个章节，我们将介绍一个新的概念：state。State允许
