@@ -52,3 +52,24 @@
 ## 3. 组件的组合
     组件可以被另外一个组件所引用。这使得我们可以在不同层级的详细信息中使用同一个组件。一个button，form，
     dialog，screen：在React中，这些通常都表现为一个组件。
+    
+    例如，我们可以创建一个多次渲染 Welcome 的组件App:
+      function Welcome(props) {
+        return <h1>Hello, {props.name}</h1>;
+      }
+      function App() {
+          return (
+            <div>
+              <Welcome name="Sara" />
+              <Welcome name="Cahal" />
+              <Welcome name="Edite" />
+            </div>
+          );
+      }
+      ReactDOM.render(
+          <App />,
+          document.getElementById('root')
+      );
+       
+    典型的，新的React应用会在顶部有一个单一的App组件。然而， 如果是在已有的项目中集成React，你可以通过自下而上的
+    方式，从一个小的组件
