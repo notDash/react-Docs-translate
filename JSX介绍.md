@@ -1,5 +1,5 @@
 
-## 1. JSX 的介绍
+## 1. JSX 的介绍([Introducing JSX](https://facebook.github.io/react/docs/introducing-jsx.html))
     思考以下变量的声明：
     const element = <h1>Hello, world!<h1>
     以上有意思的语法，既不是字符串，也不是HTML。
