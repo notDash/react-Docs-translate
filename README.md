@@ -1,6 +1,6 @@
-# react 官方文档翻译
+# [react 官方文档](https://facebook.github.io/react/docs/installation.html)翻译
 
-此文档只是针对自己在学习react的过程中进行的翻译。可能不是太专业，但是基于自己的理解，用于往后的查阅来说应该是足够了。
+此文档只是针对自己在学习[react](https://facebook.github.io/react/)的过程中进行的翻译。可能不是太专业，但是基于自己的理解，用于往后的查阅来说应该是足够了。
 
 * [JSX的介绍](https://github.com/notDash/react-Docs-translate/blob/master/JSX%E4%BB%8B%E7%BB%8D.md)
 * [渲染元素](https://github.com/notDash/react-Docs-translate/blob/master/渲染元素.md)
