@@ -12,7 +12,8 @@
 ## 2. 在JSX中嵌入表达式
     在JSX中可以嵌入任何JavaScript 表达式，通过使用一对花括号“{}”进行包裹。
     例如2 + 2, user.firstName, 和 formatName(user)都是有效的表达式：
-
+    
+```javascript
       import React from 'react';
       import ReactDom from 'react-dom';
 
@@ -35,7 +36,8 @@
           element,
           document.getElementById('root')
       );
-  
+```  
+
     输出结果为：  Hello, Harper Perez!
     为了方便阅读，我们把JSX分割成多行来书写，当然并不是必须的，但是如果要这么做的话，我们还是建议用圆括号括起来，从而避免分号自动
     插入的陷阱。
