@@ -84,20 +84,20 @@
     在渲染之前，所有的值都会被转换成字符串，这帮助解决了跨站点攻击。
     
 ## 7. JSX 是对象
-    Babel 把 JSX 语法编译之后，其实就是调用了 React.createElement().
-    以下的两个实例是等效的：
-    const element = (
+     Babel 把 JSX 语法编译之后，其实就是调用了 React.createElement().
+     以下的两个实例是等效的：
+     const element = (
        <h1 className="greeting">
           Hello, world!
        </h1>
-    );
-    const element = React.createElement(
+     );
+     const element = React.createElement(
        'h1',
        {className: 'greeting'},
        'Hello, world!'
-    );
+     );
     
-    React.createElement() 在执行的时候进行了一些校验以帮助我们写出更加健壮的代码，本质上它创建了如下的一个对象：
+     React.createElement() 在执行的时候进行了一些校验以帮助我们写出更加健壮的代码，本质上它创建了如下的一个对象：
         // 注意: 当前这个结构是简化了的
         const element = {
           type: 'h1',
@@ -106,9 +106,9 @@
             children: 'Hello, world'
           }
         };
-    这样的对象我们称之为React元素。你可以把它想象为我们在屏幕上所看到元素的一个描述。React读取这些对象，使用它们
-    来构造DOM，并且保持实时更新。
+    这样的对象我们称之为React元素。你可以把它想象为我们在屏幕上所看到元素的一个描述。React读取这些对象，使用它们
+    来构造DOM，并且保持实时更新。
     
-    我们将在下一章节讨论如何把React的元素渲染到DOM上。
+    我们将在下一章节讨论如何把React的元素渲染到DOM上。
     
-    提示： 我们推荐使用支持Babel的编辑器，从而es6和JSX语法均能够正确的高亮显示。
+    提示： 我们推荐使用支持Babel的编辑器，从而es6和JSX语法均能够正确的高亮显示。
