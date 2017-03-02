@@ -42,3 +42,13 @@
     让我们回顾下这个示例都发生了什么：
       1. 我们调用ReactDom.render()来渲染<Welcome name="Sara" />
       2. React调用Welcome组件，把{name: 'Sara'}作为props
+      3. Welcome组件返回一个<h1>Hello, Sara</h1>元素作为结果。
+      4. React DOM会及时的更新DOM去匹配 <h1>Hello, Sara</h1>
+      
+    警告： 
+    组件名称要以大写字母开头。
+    例如：<div />表示DOM标签，但是<Welcome />代表一个组件。
+    
+## 3. 组件的组合
+    组件可以被另外一个组件所引用。这使得我们可以在不同层级的详细信息中使用同一个组件。一个button，form，
+    dialog，screen：在React中，这些通常都表现为一个组件。
