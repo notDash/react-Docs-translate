@@ -2,9 +2,9 @@
 
 此文档只是针对自己在学习react的过程中进行的翻译。可能不是太专业，但是基于自己的理解，用于往后的查阅来说应该是足够了。
 
-* [JSX的介绍]()
-* [渲染元素]()
-* [组件和Props]()
+* [JSX的介绍](https://github.com/notDash/react-Docs-translate/blob/master/JSX%E4%BB%8B%E7%BB%8D.md)
+* [渲染元素](https://github.com/notDash/react-Docs-translate/blob/master/渲染元素.md)
+* [组件和Props](https://github.com/notDash/react-Docs-translate/blob/master/%E7%BB%84%E4%BB%B6%E5%92%8CProps.md)
 
 ## JSX 的介绍
     思考以下变量的声明：
@@ -20,7 +20,7 @@
     在JSX中可以嵌入任何JavaScript 表达式，通过使用一对花括号“{}”进行包裹。
     例如2 + 2, user.firstName, 和 formatName(user)都是有效的表达式：
 
-      import React from 'react';
+      `import React from 'react';
       import ReactDom from 'react-dom';
 
       function formatName(user) {
@@ -41,7 +41,7 @@
       ReactDom.render(
           element,
           document.getElementById('root')
-      );
+      );`
   
     输出结果为：  Hello, Harper Perez!
     为了方便阅读，我们把JSX分割成多行来书写，当然并不是必须的，但是如果要这么做的话，我们还是建议用圆括号括起来，从而避免分号自动
