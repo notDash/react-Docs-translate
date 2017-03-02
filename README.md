@@ -20,10 +20,10 @@
     在JSX中可以嵌入任何JavaScript 表达式，通过使用一对花括号“{}”进行包裹。
     例如2 + 2, user.firstName, 和 formatName(user)都是有效的表达式：
 
-      ```
-      import React from 'react';
+      ```javascript
+      import React from 'react';<br/>
       import ReactDom from 'react-dom';
-
+      ```
       function formatName(user) {
           return user.firstName + ' ' + user.lastName;
       }
