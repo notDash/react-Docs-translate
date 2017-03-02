@@ -40,5 +40,5 @@
       );
     
     让我们回顾下这个示例都发生了什么：
-    
-    
+      1. 我们调用ReactDom.render()来渲染<Welcome name="Sara" />
+      2. React调用Welcome组件，把{name: 'Sara'}作为props
