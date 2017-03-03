@@ -94,7 +94,7 @@
         }
 ```
 
-    2) 给class添加构造函数（constructor），给this.state进行初始化
+    2) 给class添加构造函数（constructor），给this.state进行初始化
 ```javascript
     class Clock extends React.Component {
       constructor(props) {
@@ -113,7 +113,7 @@
     }
 ```
 
-    注意constructor中是如何传递props的。
+    注意constructor中是如何传递props的。
 ```javascript
     constructor(props) {
      super(props);
@@ -121,8 +121,8 @@
     }
 ```
 
-    Class组件应该总是要调用基类的构造函数并传递props作为参数。
-    3) 删除<Clock />元素中的date属性
+    Class组件应该总是要调用基类的构造函数并传递props作为参数。
+    3) 删除<Clock />元素中的date属性
 ```javascript
         ReactDOM.render(
           <Clock />,
@@ -130,8 +130,8 @@
         );
 ```
 
-    稍后我们将把定时器添加到组件当中去。
-    结果如下：
+    稍后我们将把定时器添加到组件当中去。
+    结果如下：
 ```javascript
         class Clock extends React.Component {
           constructor(props) {
@@ -155,14 +155,13 @@
         );
 ```
 
-    接下来，我们将让Clock来设置自身的定时器， 并进行每秒更新。
+    接下来，我们将让Clock来设置自身的定时器， 并进行每秒更新。
     
 ## 给class添加生命周期方法
-
-    在多组件的应用当中，当组件销毁的时候，释放组件占用的资源至关重要。
-    当Clock被首次渲染到DOM的时候，我们想要去设置定时器。在React中称之为“mounting”。
-    当通过Clock渲染的DOM被移除的时候，我们也想要去清楚定时器。在React中称之为“unmounting”。
-    当一个组件装载和卸载的时候，我们可以在class组件中声明特殊的方法来执行相应的代码：
+    在多组件的应用当中，当组件销毁的时候，释放组件占用的资源至关重要。
+    当Clock被首次渲染到DOM的时候，我们想要去设置定时器。在React中称之为“mounting”。
+    当通过Clock渲染的DOM被移除的时候，我们也想要去清楚定时器。在React中称之为“unmounting”。
+    当一个组件装载和卸载的时候，我们可以在class组件中声明特殊的方法来执行相应的代码：
 ```javascript
     class Clock extends React.Component {
       constructor(props) {
@@ -189,8 +188,8 @@
     }
 ```
 
-    这些方法我们称之为“生命周期钩子”函数。
-    componentDidMount()是在组件被渲染到DOM之后调用的。在这儿设置定时器是比较理想的。
+    这些方法我们称之为“生命周期钩子”函数。
+    componentDidMount()是在组件被渲染到DOM之后调用的。在这儿设置定时器是比较理想的。
 ```javascript
     componentDidMount() {
         this.timerID = setInterval(
@@ -200,18 +199,18 @@
       }
 ```
 
-    注意我们是如何把定时器ID通过this进行保存的。
-    当React初始化好this.props，以及this.state之后，如果你需要存储一些额外的信息，你可以自主的添加一些属性。
-    如果在render中不使用的东西，那它不应该出现在state中。
-    我们将在componentWillUnmount() 中销毁定时器：
+    注意我们是如何把定时器ID通过this进行保存的。
+    当React初始化好this.props，以及this.state之后，如果你需要存储一些额外的信息，你可以自主的添加一些属性。
+    如果在render中不使用的东西，那它不应该出现在state中。
+    我们将在componentWillUnmount() 中销毁定时器：
 ```javascript
       componentWillUnmount() {
         clearInterval(this.timerID);
       }
 ```
 
-    最后我们来实现每秒钟执行一次的tick()方法。
-    它将使用this.setState()去更新组价的state:
+    最后我们来实现每秒钟执行一次的tick()方法。
+    它将使用this.setState()去更新组价的state:
 ```javascript
         class Clock extends React.Component {
           constructor(props) {
@@ -252,11 +251,92 @@
         );
 ```
 
-    现在这个时钟将会每秒钟执行一次。
-    现在让我们快速的回顾下发生了什么以及方法的执行顺序是什么样的：
-    1）当<Clock />被传递给ReactDOM.render()的时候。React 调用Clock组建的构造函数，由于Clock需要展示当前时间，
-    它使用一个包含当前时间的对象初始化this.state。稍后将会更新这个state。
-    2）
-    3）
-    4）
-    5）
+    现在这个时钟将会每秒钟执行一次。
+    现在让我们快速的回顾下发生了什么以及方法的执行顺序是什么样的：
+    1）当<Clock />被传递给ReactDOM.render()的时候。React 调用Clock组建的构造函数，由于Clock需要展示当前时间，
+    它使用一个包含当前时间的对象初始化this.state。稍后将会更新这个state。
+    2）紧接着React 调用Clock组件的render()方法。React通过render()了解到如何在页面进行展示。然后React根据render()的输出进行页面的渲染。
+    3）当Clock组件被渲染到DOM上之后，React调用componentDidMount()钩子函数。在函数里，Clock组件请求浏览器去调用每秒执行一次的tick()方法。
+    4）浏览器每一秒调用一次tick()方法。在方法内部，Clock组件调用setState()方法，通过传递一个包含当前时间的参数对象来更新UI。通过setState()，React知道state的变化，然后再一次调用render()方法，去对比看看应该展示什么。此时，在render()方法里的this.state.date将会不一样，所以渲染输出的内容将包含更新的时间。React 将会相应的更新DOM。
+    5）一旦Clock组件从DOM中移除之后，React将会调用componentWillUnmount()钩子
+    函数，定时任务将会被阻止。
+
+## 正确的使用State
+    关于setState()，有以下3点需要注意。
+### 不要直接修改State
+    例如，以下的代码并不会重新渲染组件：
+```javascript
+    // Wrong
+    this.state.comment = 'Hello';
+```
+
+    应该使用setState()代替：
+```javascript
+    // Correct
+    this.setState({comment: 'Hello'});
+```
+
+    只能在constructor中指定this.state。
+
+### State的更新可能是异步的
+    为了提高性能，React会一次性批量的处理多个setState()的调用。
+    由于this.props和 this.state 可能会异步的更新，所以不应该依赖于他们的值来计算下一个状态值。
+    例如，下面的代码可能会失败：
+```javascript
+    // Wrong
+    this.setState({
+      counter: this.state.counter + this.props.increment,
+    });
+```
+    
+    利用传递一个函数而不是对象的形式来修正一下。该函数接受前一个状态值作为第一个参数，当前需要更新的props作为第二个参数：
+```javascript
+    // Correct
+    this.setState((prevState, props) => ({
+      counter: prevState.counter + props.increment
+    }));
+```
+
+    上面我们使用了箭头函数，通过普通函数的方式也可以：
+```javascript
+    // Correct
+    this.setState(function(prevState, props) {
+      return {
+        counter: prevState.counter + props.increment
+      };
+    });
+```
+
+### 状态的更新会进行合并
+    当调用setState()的时候，React 会把你提供的对象与当前的state进行合并。
+    例如，你的state可能包含多个独立的变量：
+```javascript
+    constructor(props) {
+      super(props);
+      this.state = {
+        posts: [],
+        comments: []
+      };
+    }
+```
+
+    你可以通过分别调用setState()来进行更新。
+```javascript
+    componentDidMount() {
+      fetchPosts().then(response => {
+        this.setState({
+          posts: response.posts
+        });
+      });
+
+    fetchComments().then(response => {
+        this.setState({
+          comments: response.comments
+        });
+      });
+    }
+```
+
+    合并是互不影响的，所以this.setState({comments})并不会影响 this.state.posts，只会完全的替换掉this.state.comments。
+
+### 数据的向下流转
