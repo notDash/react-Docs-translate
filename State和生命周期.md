@@ -340,3 +340,46 @@
     合并是互不影响的，所以this.setState({comments})并不会影响 this.state.posts，只会完全的替换掉this.state.comments。
 
 ### 数据的向下流转
+    不管是父组件还是子组件，都不会知道某一组件是否是有状态或无状态的，并且他们不需要知道该组件是通过函数定定义的还是calss定义的。
+    这就是为什么state经常被称为局部的和私密的。除了拥有它的组件之外，其他的组件都访问不到该state。
+    一个组件可以把他的state作为props传递给其子组件。
+```javascript
+      <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+```
+
+    对于自定义的组件来说也适用：
+```javascript
+    <FormattedDate date={this.state.date} />
+```
+
+    FormattedDate 组件将会从props中接收到state参数，并且它并不知道该参数是来源于Clock的state还是props， 亦或是手动指定的一个参数：
+```javascript
+    function FormattedDate(props) {
+      return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+    }
+```
+
+    我们通常把这种数据的流动称之为自顶向下或单向的数据流。任何state总是被特定的组件所拥有，从这个state派生出来的数据和UI只能够影响到当前组件树里的子组件。
+
+    如果你把组件树想象成为一个props的瀑布流，每一个组件的state就像是在任意时间点上加入的一个水源，但是它们依然是向下流动。
+
+    为了展示所有的组件是真正的隔离的， 我们可以创建一个渲染了3个<Clock />的App组件：
+```javascript
+    function App() {
+      return (
+        <div>
+          <Clock />
+          <Clock />
+          <Clock />
+        </div>
+      );
+    }
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById('root')
+    );
+```
+
+    每一个Clock 都设置他自己的定时器，并且独立的进行更新。
+    在React 的应用当中，一个组件是否是有状态的还是无状态的，是基于该组件里内容是否是实时更新的。你可以在有状态的组件中使用无状态的组件，反之亦然。
