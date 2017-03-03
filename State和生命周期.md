@@ -53,6 +53,27 @@
     State很像props，区别在于State是属于Component私有的，完全有Component进行控制。
     我们之前说过通过classes的方式定义组件有一些特性。
     State就是其中的一个特性。
-    
-    
-    
+    
+## 转换function为class
+
+    转换一个函数化的组件为class的形式，只需要一下5步:
+        1. 创建一个具有相同名字、继承自React.Component的ES6语法的class。
+        2. 添加一个空的方法render()。
+        3. 把函数体里的内容拷贝到render()方法里。
+        4. 在render()里，把props替换为this.props。
+        5. 删除之前的函数声明
+```javascript
+        class Clock extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+                    </div>
+                );
+            }
+        }
+```
+
+    现在Clock 组件就是以class来定义的了。
+    我们现在就可以使用一些特性了。比如state以及生命周期的钩子函数了。
