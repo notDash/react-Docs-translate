@@ -6,6 +6,7 @@
 * [渲染元素](https://github.com/notDash/react-Docs-translate/blob/master/渲染元素.md)
 * [组件和Props](https://github.com/notDash/react-Docs-translate/blob/master/%E7%BB%84%E4%BB%B6%E5%92%8CProps.md)
 * [State和生命周期](https://github.com/notDash/react-Docs-translate/blob/master/State%E5%92%8C%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.md)
+* [事件处理](https://github.com/notDash/react-Docs-translate/blob/master/%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86.md)
 
 ## JSX 的介绍
     思考以下变量的声明：
