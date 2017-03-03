@@ -80,14 +80,15 @@
     
 ## 给class添加state
     通过以下3个步骤，我们把date从props移动到state:
-    1) 在render()方法中，把this.props.date替换为this.state.date
+    1) 在render()方法中，把this.props.date替换为this.state.date
 ```javascript
         class Clock extends React.Component {
           render() {
             return (
               <div>
                 <h1>Hello, world!</h1>
-                `<h2>It is {this.state.date.toLocaleTimeString()}.</h2>`
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                -----------------------------------------------------
               </div>
             );
           }
